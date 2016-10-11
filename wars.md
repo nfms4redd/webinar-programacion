@@ -24,17 +24,17 @@ que deja bloqueada la línea de comandos y nos muestra el contenido del log a me
 
 Con el comando `wget` podemos descargarnos la última versión del .war con el portal de FAO. En el siguiente ejemplo lo descargamos en `/tmp`:
 
-	usuario@virtual-fao:/tmp$ wget http://nullisland.geomati.co:8082/repository/releases/org/fao/unredd/apps/demo/5.0.0/demo-5.0.0.war
-	--2016-10-03 10:25:26--  http://nullisland.geomati.co:8082/repository/releases/org/fao/unredd/apps/demo/5.0.0/demo-5.0.0.war
-	Resolving nullisland.geomati.co (nullisland.geomati.co)... 177.85.98.237
-	Connecting to nullisland.geomati.co (nullisland.geomati.co)|177.85.98.237|:8082... connected.
+	usuario@virtual-fao:/tmp$ wget http://www.hostedredmine.com/attachments/download/204650/demo-5.0.0-beta5.war
+	--2016-10-03 10:25:26--  http://www.hostedredmine.com/attachments/download/204650/demo-5.0.0-beta5.war
+	Resolving www.hostedredmine.com (www.hostedredmine.com)... 137.45.92.217
+	Connecting to www.hostedredmine.com (www.hostedredmine.com)|137.45.92.217|:8082... connected.
 	HTTP request sent, awaiting response... 200 OK
 	Length: 6581661 (6.3M) [application/octet-stream]
 	Saving to: 'demo-5.0.0.war'
 	
-	demo-5.0.0.war 100%[===================>]   6.28M  4.26MB/s    in 1.5s    
+	demo-5.0.0-beta5.war 100%[===================>]   6.28M  4.26MB/s    in 1.5s    
 	
-	2016-10-03 10:25:28 (4.26 MB/s) - 'demo-5.0.0.war' saved [6581661/6581661]
+	2016-10-03 10:25:28 (4.26 MB/s) - 'demo-5.0.0-beta5.war' saved [6581661/6581661]
 
 Una vez tenemos el fichero .war con el portal tenemos que dárselo a Tomcat para que éste lo publique. Para ello hay que copiar dicho fichero en el directorio `webapps` de Tomcat, que se encuentra en `/var/lib/tomcat7/webapps`.
 

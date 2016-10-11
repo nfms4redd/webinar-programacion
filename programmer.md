@@ -98,7 +98,7 @@ El portal de diseminación de datos de FAO está construido sobre el núcleo de 
 
 ## Hola Geoladris
 
-Para hacer una aplicación sencilla con Geoladris tenemos que instalar en Tomcat el núcleo Geoladris de [aquí](nullisland.geomati.co:8082/repository/releases/org/fao/unredd/apps/geoladris-core/5.0.0/geoladris-core-5.0.0.war) e instalarla en Tomcat. Si hemos seguido el punto sobre [instalar el portal de diseminación](wars.md) todo estará listo y bastará copiar el fichero en `webapps`. En este caso lo copiaremos con el nombre `hola-geoladris.war`
+Para hacer una aplicación sencilla con Geoladris tenemos que instalar en Tomcat el núcleo Geoladris de [aquí](http://www.hostedredmine.com/attachments/download/204651/geoladris-core-5.0.0-beta5.war) e instalarla en Tomcat. Si hemos seguido el punto sobre [instalar el portal de diseminación](wars.md) todo estará listo y bastará copiar el fichero en `webapps`. En este caso lo copiaremos con el nombre `hola-geoladris.war`
 
 Como la variable `GEOLADRIS_CONF_DIR` ya está configurada, el directorio de configuración será `/var/geoladris/hola-geoladris/` y lo crearemos mediante el comando `mkdir` (sin sudo si hemos cambiado el propietario de `/var/geoladris`):
 
