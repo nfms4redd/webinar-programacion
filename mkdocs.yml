@@ -1,3 +1,7 @@
 site_name: Tutorial Geoladris
+site_dire: .
 pages:
 - Home: introduccion.md
+- 'Introduccion': introduccion.md
+- 'Instalación del portal de diseminación': wars.md
+- 'Tutorial programación': programmer.md
