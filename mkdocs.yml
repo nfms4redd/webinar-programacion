@@ -1,5 +1,4 @@
 site_name: Tutorial Geoladris
-site_dire: .
 pages:
 - Home: introduccion.md
 - 'Introduccion': introduccion.md
