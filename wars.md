@@ -226,11 +226,11 @@ Se trata de un fichero XML que tiene la siguiente sección:
 		username="spatial_user" password="unr3dd" maxActive="20" maxIdle="10"
 		maxWait="-1" />
 
-donde podemos ver que se especifica la URL de la base de datos, el usuario y password y algunos parámetros más para el pool de conexiones que Tomcat crea. Por defecto hay unos valores que se usan para pruebas durante el desarrollo y que obviamente no se adaptan a los distintos entornos de producción. Si por ejemplo, la base de datos se llama "portal" se encuentra en el mismo servidor que Tomcat y se accede con el usuario "admin_portal" y con el password "bosques", la sección anterior habrá de cambiarse así:
+donde podemos ver que se especifica la URL de la base de datos, el usuario y password y algunos parámetros más para el pool de conexiones que Tomcat crea. Por defecto hay unos valores que se usan para pruebas durante el desarrollo y que obviamente no se adaptan a los distintos entornos de producción. Si por ejemplo, la base de datos se llama "portal" se encuentra en el mismo servidor que Tomcat y se accede con el usuario "portal_admin" y con el password "capacitacion", la sección anterior habrá de cambiarse así:
 
 	<Resource name="jdbc/unredd-portal" auth="Container" type="javax.sql.DataSource"
 		driverClassName="org.postgresql.Driver" url="jdbc:postgresql://localhost:5432/portal"
-		username="admin_portal" password="bosques" maxActive="20" maxIdle="10"
+		username="portal_admin" password="capacitacion" maxActive="20" maxIdle="10"
 		maxWait="-1" />
 
 Una modificado este fichero tendremos que reiniciar el portal con el comando `touch`, lo cual regenerará el directorio portal... **¡que es donde está el fichero que acabamos de editar!**.
