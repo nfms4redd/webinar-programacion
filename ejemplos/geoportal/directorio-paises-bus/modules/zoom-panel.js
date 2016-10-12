@@ -25,8 +25,7 @@ define([ "message-bus" ], function(bus) {
 					var pais = $(e.target).attr("id");
 					bus.send("zoom-to", {
 						"x" : paises[pais][0],
-						"y" : paises[pais][1],
-						"zoomLevel" : 4
+						"y" : paises[pais][1]
 					});
 				});
 			}

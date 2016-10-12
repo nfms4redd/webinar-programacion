@@ -67,16 +67,42 @@ Así, si queremos quitar una funcionalidad, tenemos que:
 * quitar los CSS del HTML
 * quitar las librerías y su configuración de RequireJS.
 
-En el siguiente punto vamos a ver cómo el proyecto Geoladris permite el empaquetado de todos estos aspectos en un concepto "plugin" de más alto nivel.  
+A continuación vamos a ver cómo el proyecto Geoladris permite el empaquetado de todos estos aspectos en un concepto "plugin" de más alto nivel.
+
+## Resumen
+
+Hasta ahora hemos visto
+
+1. la instalación del portal de FAO en Tomcat, los normales que obtenemos al instalarlo y cómo solucionarlos,
+2. la existencia de un árbol de elementos (HTML) y estilos (CSS),
+3. que programando Javascript podemos añadir interactividad,
+4. dos recomendaciones al trabajar con HTML, CSS y Javascript:
+
+    * Hay que separar los CSS del resto de cosas
+    * Hay que evitar que los ficheros Javascript crezcan de forma descontrolada 
+
+5. y un modelo de aplicación que se apoya en RequireJS para tener todos estos conceptos separados y hemos visto que no es práctico.
+
+Ahora vamos a ver cómo desde Geoladris tratamos de trabajar con los estándares del web, HTML, CSS y Javascript, apoyándonos en RequireJS y algún otro concepto para hacer las aplicaciones modulares y eliminando la problemática encontrada con RequireJS.  
 
 ## Geoladris
 
-[Geoladris](https://github.com/geoladris/) es un proyecto escrito en Java que permite agrupar todos los aspectos necesarios para implementar una funcionalidad (módulos RequireJS, CSS, configuración, etc.) en el concepto de plugin.
+### Historia
 
-Su funcionamiento es simple: 
+[Geoladris](https://github.com/geoladris/) surge de la integración del portal de diseminación de datos forestales impulsado por FAO y los portales desarrollados por la empresa CSGIS (Ejemplo: http://demo-viewer.csgis.de/). Todos estos portales utilizan ahora un núcleo común, que es mantenido y mejorado por una comunidad mayor.
+
+La integración de ambos proyectos es reciente y a día de hoy (octubre, 2016) estamos estabilizando la primera versión resultado de esta integración. El objetivo es fomentar el crecimiento de la comunidad de desarrolladores abierta.
+
+Los beneficios para los usuarios de los portales FAO son de momento a nivel interno, por ejemplo la posibilidad de configurar múltiples portales (cada uno con su directorio de configuración) en una misma instancia de Tomcat. Pero en siguientes versiones habrá autenticación, configuración específica según el rol del usuario, migración a OpenLayers 3, etc. 
+
+### Apuesta tecnológica   
+
+Geoladris es un proyecto que permite agrupar todos los aspectos necesarios para implementar una funcionalidad determinada (módulos RequireJS, CSS, configuración, etc.) en el concepto de plugin.
+
+Su funcionamiento es simple:
 
 1. Para cada funcionalidad, existe un directorio con todos los componentes necesarios organizados de una manera precisa, que se explica más adelante.
-2. El núcleo de Geoladris lee todos los elementos necesarios y los ofrece como una aplicación RequireJS: generando la carga de CSS en el HTML, generando la llamada para cargar todos los módulos, etc.)
+2. El núcleo de Geoladris lee todos los elementos necesarios y los ofrece como una aplicación RequireJS: generando la carga de CSS en el HTML, generando la llamada para cargar todos los módulos, etc.
 
 Además de esto, Geoladris nos permite:
 - Activar y desactivar plugins mediante configuración.
@@ -98,7 +124,9 @@ El portal de diseminación de datos de FAO está construido sobre el núcleo de 
 
 ## Hola Geoladris
 
-Para hacer una aplicación sencilla con Geoladris tenemos que instalar en Tomcat el núcleo Geoladris de [aquí](http://www.hostedredmine.com/attachments/download/204651/geoladris-core-5.0.0-beta5.war) e instalarla en Tomcat. Si hemos seguido el punto sobre [instalar el portal de diseminación](wars.md) todo estará listo y bastará copiar el fichero en `webapps`. En este caso lo copiaremos con el nombre `hola-geoladris.war`
+Para hacer una aplicación sencilla con Geoladris tenemos que descargar el núcleo de Geoladris de [aquí](http://www.hostedredmine.com/attachments/download/204651/geoladris-core-5.0.0-beta5.war) e instalarlo en Tomcat. Si hemos seguido el punto sobre [instalar el portal de diseminación](wars.md) todo estará listo y bastará copiar el fichero en `webapps`. En este caso lo copiaremos con el nombre `hola-geoladris.war`
+
+Si vamos a la página `http://<ip del servidor>:8080/hola-geoladris/` podremos ver se carga una página en blanco, que tendremos que extender mediante un plugin. Los plugins los añadiremos en el directorio `plugins` del directorio de configuración.
 
 Como la variable `GEOLADRIS_CONF_DIR` ya está configurada, el directorio de configuración será `/var/geoladris/hola-geoladris/` y lo crearemos mediante el comando `mkdir` (sin sudo si hemos cambiado el propietario de `/var/geoladris`):
 
@@ -111,7 +139,7 @@ En dicho directorio crearemos otro llamado "plugins" que es el que contendrá nu
 Si nuestro hola mundo consiste en un elemento `h1` con un mensaje, tendremos que:
 
 1. Crear un directorio para el plugin, que llamaremos "titulo": `sudo mkdir /var/geoladris/hola-geoladris/plugins/titulo`; dentro de este directorio tendremos la estructura descrita en el punto anterior con los directorios `modules/`, `styles/`, etc.
-2. En este caso sólo necesitamos crear un módulo, que meteremos en el directorio `modules/` con el siguiente contenido:
+2. En este caso sólo necesitamos crear un módulo, que llamaremos `h1-modulo` y meteremos en el directorio `modules/` con el siguiente contenido:
 
 	define([ "jquery" ], function($) {
 		$("<h1>")//
@@ -121,15 +149,20 @@ Si nuestro hola mundo consiste en un elemento `h1` con un mensaje, tendremos que
 		// <h1 id="titulo">Hola mundo</h1>
 	});
 
-Los ejemplos siguientes se pueden encontrar [aquí](ejemplos/geoladris/mensaje-cool), que es el directorio de configuración que contiene el directorio `plugins` que contiene todos los plugins:
+Una vez hecho esto, hay que reiniciar la aplicación `hola-geoladris` para que se reescanee el directorio `plugins` y se registre el módulo que hemos añadido:
+
+	$ sudo touch /var/lib/tomcat7/webapps/hola-geoladris.war
+
+Por último, si vamos al navegador y recargamos la página, veremos que ahora se muestra el título de nuestro hola mundo. 
+
+A continuación se realizan una serie de ejemplos para ir ilustrando el funcionamiento de Geoladris. Los ejemplos se pueden encontrar [aquí](ejemplos/geoladris/mensaje-cool), que es el directorio de configuración con un directorio `plugins` que contiene todos los plugins resultantes de los ejemplos:
 
 * Ejemplo: Migración del ejemplo mensaje-cool a Geoladris (mensaje-cool)
+* Ejemplo: Migración del resto de módulos a Geoladris en sus respectivos plugins
 * Ejemplo: Eliminar el plugin "mensaje" y observar el resultado
-* Ejemplo: Eliminar el plugin i18n y observar el resultado. (es responsabilidad del usuario gestionar las dependencias entre plugins).
+* Ejemplo: Eliminar el plugin i18n y observar el resultado.
 
-Además de proporcionar el concepto de plugin, el núcleo de Geoladris incorpora algunas extensiones a RequireJS que facilitan el trabajo. Por ejemplo el plugin `text` que permite cargar recursos que hay en el servidor como si fueran otro módulo. Esto nos permite por ejemplo cargar una plantilla con la interfaz gráfica, o cargar unos datos fijos utilizados para un cálculo, etc. 
-
-TODO: ejemplo con !text
+Como vemos en el último punto, es responsabilidad del usuario gestionar las dependencias entre plugins. Veremos más adelante una solución que permite reducir las dependencias entre los plugins y hacer que esto en realidad no sea un problema muy grande. Por lo menos hasta ahora. 
 
 ## Configurando plugins
 
@@ -203,7 +236,7 @@ Si ejecutamos el código veremos que el funcionamiento es exactamente el mismo y
 
 #### Sobreescritura de la configuración por defecto
 
-La ventaja es que ahora el usuario puede ir al directorio de configuración y poner las cadenas de traducción que considere oportunas, por ejemplo, en español:
+La ventaja es que ahora un usuario sin conocimientos de programación puede ir al directorio de configuración y poner las cadenas de traducción que considere oportunas, por ejemplo, en español:
 
 	{
 		"mensaje": {
@@ -221,11 +254,9 @@ La ventaja es que ahora el usuario puede ir al directorio de configuración y po
 
 En este punto vamos a ver que el portal de diseminación del Sistema Nacional de Monitoreo de Bosques (SNMB) es una aplicación Geoladris y que los mismos plugins que hicimos en los puntos anteriores son válidos en el contexto del portal.
 
-Asumimos que en la misma instancia de Tomcat en la que venimos trabajando hay un fichero portal.war con la última versión del portal de diseminación, que hará que se pueda consultar el portal en la URL "http://<ip del servidor>:8080/portal".
+Asumimos que en la misma instancia de Tomcat en la que venimos trabajando hay un fichero portal.war con la última versión del portal de diseminación, que hará que se pueda consultar el portal en la URL `http://<ip del servidor>:8080/portal`.
 
-Si hemos seguido el [capítulo sobre los wars](wars.md) habremos establecido el directorio de configuración en `/var/geoladris/portal/`.
-
-TODO: crear un directorio de configuración en el que el zoom es toda latinoamérica y hay capas de los portales de Ecuador, Bolivia, Paraguay y Argentina. Guardar el directorio en los ejemplos de la documentación.
+Si hemos seguido el [capítulo sobre la instalación del portal](wars.md) habremos establecido el directorio de configuración en `/var/geoladris/portal/`.
 
 * Ejercicio: copiar en "plugins" del directorio de configuración del portal el plugin con el mensaje "cool". 
 
@@ -235,31 +266,37 @@ De nuevo hemos pasado por los distintos problemas que pueden surgir al montar un
 
 1. Los plugins Geoladris pueden ponerse en el directorio `plugins` del directorio de configuración.
 2. Dentro del directorio de un plugin podemos encontrar distintos directorios donde meter nuestros módulos RequireJS, nuestras hojas de estilo y nuestras librerías.
-3. En la raíz podemos del directorio de un plugin podemos encontrar un descriptor terminado en `-conf.json` que puede contener la información sobre la ubicación de las librerías que usa el plugin así como la configuración por defecto de los módulos que hemos programado configurables.
-4. La configuración por defecto la podemos sobreescribir en el directorio de configuración, en un fichero `public-conf.json`, en el que podemos además habilitar y deshabilitar plugins.
+3. Las dependencias entre módulos deben cualificarse con el nombre del plugin donde se encuentra el módulo referenciado. 
+4. En la raíz del directorio de un plugin podemos encontrar un descriptor terminado en `-conf.json` que puede contener la información sobre la ubicación de las librerías que usa el plugin (configuración de RequireJS) así como la configuración por defecto de los módulos que hemos programado configurables (elemento `default-conf`).
+5. La configuración por defecto la podemos sobreescribir en el directorio de configuración, en un fichero `public-conf.json`, en el que podemos además habilitar y deshabilitar plugins.
 
 ## Interacción con otros plugins
 
-Hemos visto que existen dependencias entre nuestros plugins y que si eliminamos un plugin, aquellos que tengan referencias al mismo van a fallar. En resumen, que tenemos que tener en cuenta manualmente las dependencias entre plugins.
+Anteriormente hemos visto que existen dependencias entre nuestros plugins y que si eliminamos un plugin, aquellos que tengan referencias al mismo van a fallar. Es decir, que tenemos que tener en cuenta manualmente las dependencias entre plugins.
 
 Para evitar este tipo de problemas se pueden seguir una serie de estrategias. Se pueden escribir las dependencias en un fichero README o agrupar los módulos en plugins de forma más lógica para evitar las dependencias, etc.
 
-Hay una estrategia que es usada ampliamente en las aplicaciones Geoladris, que es el uso de un bus de mensajes. Cuando una parte de la aplicación tiene que ser notificada de algo, en lugar de importar el módulo que necesitamos e invocar algún método, lo que hacemos es lanzar un evento a través de un `bus` y éste se encarga de notificar a todos los módulos interesados. Veamos un ejemplo:
+Hay una estrategia ofrecida por el núcleo de Geoladris, que es el uso de un bus de mensajes. Cuando una parte de la aplicación tiene que ser notificada de algo, en lugar de importar el módulo que necesitamos e invocar algún método, lo que hacemos es lanzar un evento a través de un `bus` y éste se encarga de notificar a todos los módulos interesados. Veamos un ejemplo:
 
 * Ejemplo: crear un plugin que muestre los nombres de los países y haga zoom a los mismos.
+
+Lo primero que podemos observar es que en el primer ejemplo el módulo `zoom-panel` importa al módulo `map`, que es el módulo que instala el mapa en el portal y devuelve la instancia del mapa creado. Este módulo se encuentra en un plugin que, al contrario que los plugins con los que nosotros estamos trabajando, se empaqueta como un fichero Jar. Frecuentemente los plugins así empaquetados son anónimos y no requieren cualificador en la importación.  
+
 * Ejemplo: El mismo ejemplo anterior pero haciendo zoom mediante un evento.
 
-Lo principal que podemos observar entre las dos implementaciones de `zoom-panel.js` es que la segunda no tiene al mapa como dependencia. En su lugar tiene una referencia al módulo `message-bus`. Y esto tiene una serie de consecuencias positivas:
+En este caso podemos observar que el módulo `zoom-panel` no tiene al mapa como dependencia. En su lugar tiene una referencia al módulo `message-bus`. Y esto tiene una serie de consecuencias positivas:
 
 * ¿Cómo se llama el módulo que instala el mapa en la aplicación? A nuestro módulo le da igual.
 * Ya no usamos Open Layers directamente. ¿Es OpenLayers 2? ¿OpenLayers 3? ¿Leaflet? A nuestro módulo le da igual.
-* ¿Cuántos mapas hay en nuestra aplicación? ¿uno? ¿dos? ¿ninguno? A nuestro módulo le da igual.
+* ¿Cuántos módulos hay en nuestra aplicación? ¿uno? ¿dos? ¿ninguno? A nuestro módulo le da igual.
 
-El resultado es que nuestro módulo va a funcionar independientemente de que haya mapa o no. Obviamente si no hay mapa no tendrá efecto ninguno.
+El resultado es que nuestro módulo va a funcionar independientemente de que haya mapa o no. Obviamente si no hay mapa no tendrá efecto ninguno, pero si hay mapa y este implementa el evento `zoom-to`, nuestro plugin funcionará correctamente.
 
-En el caso anterior era posible también recuperar la referencia al mapa, pero en otros casos la única forma de operar es con el `message-bus`. 
+En el caso anterior era posible implementar la funcionalidad de las dos maneras: usando el bus y recuperando la referencia al mapa. Pero en otros casos la única forma de operar es con el `message-bus`. 
 
 Ejemplo: Mostrar la leyenda de una capa usando el evento "open-legend" con el id de la capa.
+
+Tal vez sea interesante en este punto echar un vistazo a la [referencia de mensajes existentes en el portal demo](http://snmb-desarrollo.readthedocs.io/en/develop/messages.html).
 
 ## Comunicación con el servidor
 
