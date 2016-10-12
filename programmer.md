@@ -304,17 +304,178 @@ Geoladris es una aplicación cliente/servidor en la que el cliente ofrece una in
 
 Para obtener información del servidor es necesario que haya un servicio en algún punto que nos devuelva un documento en algún formato (JSON, XML, etc) que la aplicación cliente utilizará para ofrecer una nueva funcionalidad al usuario. Un ejemplo de esta interacción es la herramienta de información.
 
+Un ejemplo de servicio pueden ser los que ofrece el propio GeoServer. Por ejemplo, el servicio WFS nos permite explorar las provincias de Argentina con una llamada similar a la siguiente:
+
+	http://snmb.ambiente.gob.ar/geo-server/wfs?request=DescribeFeatureType&service=WFS&VERSION=1.0.0&TypeName=bosques_umsef_db:limites_provinciales&outputformat=application/json
+
+Que nos da el siguiente resultado:
+
+	{
+		"elementFormDefault": "qualified",
+		"targetNamespace": "http://www.ambiente.gov.ar/umsef/",
+		"targetPrefix": "bosques_umsef_db",
+		"featureTypes": [{
+			"typeName": "limites_provinciales",
+			"properties": [{
+				"name": "geom",
+				"maxOccurs": 1,
+				"minOccurs": 0,
+				"nillable": true,
+				"type": "gml:MultiPolygon",
+				"localType": "MultiPolygon"
+			}, {
+				"name": "nprov",
+				"maxOccurs": 1,
+				"minOccurs": 0,
+				"nillable": true,
+				"type": "xsd:string",
+				"localType": "string"
+			}, {
+				"name": "cod_indec",
+				"maxOccurs": 1,
+				"minOccurs": 0,
+				"nillable": true,
+				"type": "xsd:string",
+				"localType": "string"
+			}]
+		}]
+	}
+
+En él podemos ver que se trata de un juego de datos de tipo poligonal con un par de campos alfanuméricos, llamados `nprov` y `cod_indec`. Con esta información podemos construir una nueva llamada al mismo servicio:
+
+	http://snmb.ambiente.gob.ar/geo-server/wfs?REQUEST=GetFeature&SERVICE=WFS&propertyname=nprov&TYPENAME=bosques_umsef_db:limites_provinciales&VERSION=1.1.0&EXCEPTIONS=XML&outputformat=application/json&srsName=EPSG:4326
+
+que nos da los nombres y bounding boxes de todas las provincias:
+
+	{
+		"type": "FeatureCollection",
+		"totalFeatures": 24,
+		"features": [{
+			"type": "Feature",
+			"id": "limites_provinciales.1",
+			"geometry": null,
+			"properties": {
+				"nprov": "SANTIAGO DEL ESTERO",
+				"bbox": [-65.18818569500002, -30.479927686999996, -61.711134446, -25.64903445800003]
+			}
+		}, {
+			"type": "Feature",
+			"id": "limites_provinciales.2",
+			"geometry": null,
+			"properties": {
+				"nprov": "MISIONES",
+				"bbox": [-56.05863752900001, -28.16355089600001, -53.63796255199997, -25.493997679000024]
+			}
+		}, {
+		[...]
+		}, {
+			"type": "Feature",
+			"id": "limites_provinciales.24",
+			"geometry": null,
+			"properties": {
+				"nprov": "CORRIENTES",
+				"bbox": [-59.712013254000006, -30.72953170300004, -55.62023666599997, -27.25902536000001]
+			}
+		}, {
+			"type": "Feature",
+			"id": "limites_provinciales.9",
+			"geometry": null,
+			"properties": {
+				"nprov": "TIERRA DEL FUEGO, ANTARTIDA E ISLAS DEL ATLANTICO SUR",
+				"bbox": [-74.02985395600001, -85.01286535200002, -25.02314483700002, -51.02291107199999]
+			}
+		}],
+		"crs": null
+	}
+
+Y con esta información podemos modificar nuestro `zoom-panel` para que funcione con las provincias de Argentina, como se puede apreciar en el ejemplo "directorio-provincias". Algunos aspectos a destacar:
+
+- Uso del evento `ajax` para comunicarse de forma asíncrona con el servidor
+- Uso del servicio `proxy` proporcionado por el cliente
+
+El uso de cualquier servicio en el servidor sigue el mismo patrón:
+
+1. Se conecta al servidor con el evento `ajax`, directamente si el servicio está en la misma máquina o via `proxy` si no.
+2. Se obtiene un documento en respuesta, preferentemente en formato JSON.
+3. Se realizan las acciones oportunas con la información obtenida
+
+## Eventos y módulos de interés en el portal FAO
+
+Además del evento `ajax` anterior, hay otros eventos interesantes:
+
+### error
+
+Tan sencillo como útil. Lanzar un error al usuario:
+
+	define(["message-bus"], function(bus){
+		bus.listen("modules-loaded", function() {
+			bus.send("error", "Algo muuuuuuy malo ha pasado"); 
+		});
+	});
+
+Actualmente se muestra un alert, pero el uso del mensaje `error` nos permite cambiar la gestión de los errores de forma centralizada.
+
+### show-info
+
+Permite mostrar una ventana con información. Por ejemplo como panel de entrada a la web:
+
+	define(["message-bus"], function(bus){
+	    bus.listen("modules-loaded", function() {
+	        bus.send("show-info", ["Bienvenido al portal", "http://geoladris-core.readthedocs.io/"]); 
+	    });
+	});
+
+### register-layer-action
+
+Permite asociar elementos a las capas en el árbol de capas: 
+
+	define(["message-bus"], function(bus){
+		bus.listen("before-adding-layers", function() {
+	
+			var showInfoAction = function(portalLayer) {
+		                return $("<button/>")//
+				.html("Clica aquí")//
+				.on("click", function(){
+					alert("Se clicó la capa: " + portalLayer.label);
+				});
+			};
+	
+			bus.send("register-layer-action", showInfoAction);
+	
+		});
+	});
+	
+### layers-loaded
+
+Permite añadir elementos al árbol de capas y al mapa... porque ambos elementos 
+
+	define(["message-bus"], function(bus){
+	
+		bus.listen("layers-loaded", function(event, root) {
+			if (root.getGroup("migrupo") == null){
+				root.addGroup({
+					"id":"migrupo",
+					"label":"Nuevo grupo",
+					"items" : []
+				});
+				root.addLayer("migrupo", {
+					"id" : "meteo-eeuu",
+					"label" : "Radar EEUU",
+					"active" : "true",
+					"timeInstances" : "2010-03-01T00:00,2010-03-02T00:00,2010-03-03T00:00",
+					"date-format" : "DD-MM-YYYY",
+					"layers" : ["meteo-eeuu"]
+				}, {
+					"id" : "meteo-eeuu",
+					"baseUrl" : "http://mesonet.agron.iastate.edu/cgi-bin/wms/nexrad/n0r-t.cgi",
+					"wmsName" : "nexrad-n0r-wmst"
+				});
+			}
+		});
+	
+	});
 
 
-Requisitos del servicio usado desde Geoladris
-TODO insertar en el punto de la primera sesión que hay que desarrollar un pequeño servicio que devuelve la temperatura en las coordenadas que se pasan
-TODO Comentar que GeoServer ofrece estas capacidades  
-TODO Ejemplos de interacción con GeoServer (obtener la geometría en la que hemos pinchado y dibujar un buffer?)
 
-## Plugins de interés en el portal FAO
-
-Se muestran los eventos de los plugins que pueden ser interesantes para construir nuevos plugins
-
-Ejemplo: internacionalización con los parámetros de la URL
 
 
