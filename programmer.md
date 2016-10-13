@@ -89,24 +89,32 @@ Ahora vamos a ver cómo desde Geoladris tratamos de trabajar con los estándares
 
 ### Historia
 
-[Geoladris](https://github.com/geoladris/) surge de la integración del portal de diseminación de datos forestales impulsado por FAO y los portales desarrollados por la empresa CSGIS (Ejemplo: http://demo-viewer.csgis.de/). Todos estos portales utilizan ahora un núcleo común, que es mantenido y mejorado por una comunidad mayor.
+[Geoladris](https://github.com/geoladris/) surge de la integración del portal de diseminación de datos forestales impulsado por FAO y los portales desarrollados por la empresa CSGIS ([aquí](http://demo-viewer.csgis.de/) puede verse una demo). Los desarrollos en ambos casos utilizan ahora un núcleo común, que es mantenido y mejorado por una comunidad ligeramente mayor.
 
-La integración de ambos proyectos es reciente y a día de hoy (octubre, 2016) estamos estabilizando la primera versión resultado de esta integración. El objetivo es fomentar el crecimiento de la comunidad de desarrolladores abierta.
+La integración de ambos proyectos es reciente y a día de hoy (octubre, 2016) estamos estabilizando la primera versión resultado de esta integración. 
 
-Los beneficios para los usuarios de los portales FAO son de momento a nivel interno, por ejemplo la posibilidad de configurar múltiples portales (cada uno con su directorio de configuración) en una misma instancia de Tomcat. Pero en siguientes versiones habrá autenticación, configuración específica según el rol del usuario, migración a OpenLayers 3, etc. 
+Los beneficios para los usuarios de los portales FAO son a nivel de configuración, por ejemplo la posibilidad de configurar múltiples portales en una misma instancia de Tomcat, cada uno con su directorio de configuración. Pero en siguientes versiones habrá autenticación, configuración específica según el rol del usuario, migración a OpenLayers 3, etc. En resumen, más versatilidad y componentes más modernos.
+
+En el futuro a corto plazo se seguirá trabajando en el crecimiento del proyecto. Para ello es necesario que la comunidad siga creciendo, por lo que tras la publicación de esta primera versión se pasará a estructurar el desarrollo de forma que:
+
+- Sea público. Todas las decisiones se harán en [la lista preparada a tal efecto](https://groups.google.com/forum/#!forum/geoladris).
+- Haya unas normas claras para la toma de decisiones. Creación de un comité de dirección abierto a nuevas incorporaciones.
+- Sea posible y simple hacer alguna contribución al proyecto.
+
+En definitiva, abrir el desarrollo para que Geoladris sea una alternativa tecnológica previsible y viable. 
 
 ### Apuesta tecnológica   
 
-Geoladris es un proyecto que permite agrupar todos los aspectos necesarios para implementar una funcionalidad determinada (módulos RequireJS, CSS, configuración, etc.) en el concepto de plugin.
+A nivel tecnológico, Geoladris permite agrupar todos los aspectos necesarios para implementar una funcionalidad determinada (módulos RequireJS, CSS, configuración, etc.) en el concepto de plugin.
 
 Su funcionamiento es simple:
 
 1. Para cada funcionalidad, existe un directorio con todos los componentes necesarios organizados de una manera precisa, que se explica más adelante.
-2. El núcleo de Geoladris lee todos los elementos necesarios y los ofrece como una aplicación RequireJS: generando la carga de CSS en el HTML, generando la llamada para cargar todos los módulos, etc.
+2. El núcleo de Geoladris lee todos los elementos necesarios y los ofrece como una aplicación web: generando la carga de CSS en el HTML, generando la llamada para cargar todos los módulos RequireJS, etc.
 
-Además de esto, Geoladris nos permite:
-- Activar y desactivar plugins mediante configuración.
-- Modificar la configuración de los plugins.
+El núcleo de Geoladris, en tanto que encargado de la gestión de plugins, ofrece además algunas funcionalidades extras como la habilitación y deshabilitación de plugins por configuración, la posibilidad de tener un directorio con la configuración de los plugins, etc. 
+
+Y ya por encima del núcleo podemos encontrar algunos plugins básicos que ofrecen apoyo para la implementación de los plugins, como leer los parámetros de la URL, internacionalizar las cadenas de texto, comunicar con servicios externos, etc.
 
 La estructura de un plugin Geoladris consta de:
 
@@ -118,9 +126,7 @@ La estructura de un plugin Geoladris consta de:
 
 Para información detallada sobre el formato del descriptor del plugin se puede consultar la [documentación de referencia](https://geoladris-core.readthedocs.io/es/latest/plugins/#estructura) 
 
-Además, toda aplicación Geoladris consta de un directorio de configuración donde se puede cambiar la configuración de los plugins y añadir nuevos plugins.
-
-El portal de diseminación de datos de FAO está construido sobre el núcleo de Geoladris, lo cual quiere decir que todas sus funcionalidades están agrupadas en distintos plugins que contienen la estructura de directorios recién descrita. Como aplicación Java, es posible crear plugins Geoladris para extender el portal con las herramientas de programación habituales en el desarrollo de Java. Sin embargo es también posible crear plugins en el mencionado directorio de configuración, olvidándonos así de Java por completo. En lo que resta de capacitación nos centraremos en la creación de plugins **sin** necesidad de Java.
+El portal de diseminación de datos de FAO está construido sobre el núcleo de Geoladris, lo cual quiere decir que todas sus funcionalidades están agrupadas en distintos plugins que contienen la estructura de directorios recién descrita. Como aplicación Java, es posible crear plugins Geoladris para extender el portal con las herramientas de programación habituales en el desarrollo de Java. Sin embargo es también posible crear plugins **sin** necesidad de Java. En lo que resta de capacitación nos centraremos en la creación de plugins olvidándonos de Java por completo.
 
 ## Hola Geoladris
 
@@ -280,7 +286,9 @@ Hay una estrategia ofrecida por el núcleo de Geoladris, que es el uso de un bus
 
 * Ejemplo: crear un plugin que muestre los nombres de los países y haga zoom a los mismos.
 
-Lo primero que podemos observar es que en el primer ejemplo el módulo `zoom-panel` importa al módulo `map`, que es el módulo que instala el mapa en el portal y devuelve la instancia del mapa creado. Este módulo se encuentra en un plugin que, al contrario que los plugins con los que nosotros estamos trabajando, se empaqueta como un fichero Jar. Frecuentemente los plugins así empaquetados son anónimos y no requieren cualificador en la importación.  
+Lo primero que podemos observar es que en el primer ejemplo el módulo `zoom-panel` importa al módulo `map`, que es el módulo que instala el mapa en el portal y devuelve la instancia del mapa creado. Este módulo se encuentra en un plugin que, al contrario que los plugins con los que nosotros estamos trabajando, se empaqueta como un fichero Jar. Frecuentemente los plugins así empaquetados no requieren cualificador en la importación.
+
+Al tener una dependencia al módulo map, que es un mapa OpenLayers 2, nuestro módulo va a fallar si se renombra `map` a `mapa` por ejemplo, o si el módulo `map` actualiza a OpenLayers 3 o Leaflet, o incluso decidimos quitar el mapa del portal. Estamos en la misma situación que sucedió cuando quitamos el plugin `i18n` en el ejemplo anterior.
 
 * Ejemplo: El mismo ejemplo anterior pero haciendo zoom mediante un evento.
 
@@ -292,19 +300,21 @@ En este caso podemos observar que el módulo `zoom-panel` no tiene al mapa como 
 
 El resultado es que nuestro módulo va a funcionar independientemente de que haya mapa o no. Obviamente si no hay mapa no tendrá efecto ninguno, pero si hay mapa y este implementa el evento `zoom-to`, nuestro plugin funcionará correctamente.
 
-En el caso anterior era posible implementar la funcionalidad de las dos maneras: usando el bus y recuperando la referencia al mapa. Pero en otros casos la única forma de operar es con el `message-bus`. 
+En el caso anterior era posible implementar la funcionalidad de las dos maneras: usando el bus y recuperando la referencia al mapa. Pero en otros casos la única forma de operar es con el `message-bus`, lo cual es una constante en el portal.
 
-Ejemplo: Mostrar la leyenda de una capa usando el evento "open-legend" con el id de la capa.
+* Ejemplo: Mostrar la leyenda de una capa usando el evento "open-legend" con el id de la capa.
 
 Tal vez sea interesante en este punto echar un vistazo a la [referencia de mensajes existentes en el portal demo](http://snmb-desarrollo.readthedocs.io/en/develop/messages.html).
 
-## Comunicación con el servidor
+## Eventos y módulos de interés en el portal FAO
+
+### ajax
 
 Geoladris es una aplicación cliente/servidor en la que el cliente ofrece una interacción al usuario con la información que obtiene del servidor.
 
 Para obtener información del servidor es necesario que haya un servicio en algún punto que nos devuelva un documento en algún formato (JSON, XML, etc) que la aplicación cliente utilizará para ofrecer una nueva funcionalidad al usuario. Un ejemplo de esta interacción es la herramienta de información.
 
-Un ejemplo de servicio pueden ser los que ofrece el propio GeoServer. Por ejemplo, el servicio WFS nos permite explorar las provincias de Argentina con una llamada similar a la siguiente:
+Ejemplos de este tipo de servicios son los que ofrece el propio GeoServer. Por ejemplo, el servicio WFS nos permite explorar las provincias de Argentina con una llamada similar a la siguiente:
 
 	http://snmb.ambiente.gob.ar/geo-server/wfs?request=DescribeFeatureType&service=WFS&VERSION=1.0.0&TypeName=bosques_umsef_db:limites_provinciales&outputformat=application/json
 
@@ -399,9 +409,6 @@ El uso de cualquier servicio en el servidor sigue el mismo patrón:
 2. Se obtiene un documento en respuesta, preferentemente en formato JSON.
 3. Se realizan las acciones oportunas con la información obtenida
 
-## Eventos y módulos de interés en el portal FAO
-
-Además del evento `ajax` anterior, hay otros eventos interesantes:
 
 ### error
 
@@ -444,10 +451,10 @@ Permite asociar elementos a las capas en el árbol de capas:
 	
 		});
 	});
-	
-### layers-loaded
 
-Permite añadir elementos al árbol de capas y al mapa... porque ambos elementos 
+### layers-loaded, add-layer y add-group
+
+`layers-loaded` permite obtener una referencia a la raíz del árbol de capas. 
 
 	define(["message-bus"], function(bus){
 	
@@ -471,6 +478,31 @@ Permite añadir elementos al árbol de capas y al mapa... porque ambos elementos
 					"wmsName" : "nexrad-n0r-wmst"
 				});
 			}
+		});
+	
+	});
+
+Los eventos `add-layer` y `add-group` permiten añadir capas y grupos mediante eventos, pero actualmente están rotos. El código para añadir las capas y grupos sería parecido al siguiente:
+
+	define(["message-bus"], function(bus){
+		
+		bus.listen("modules-loaded", function() {
+			bus.send("add-group", {
+				"id":"migrupo",
+				"label":"Nuevo grupo"
+			});
+			
+			bus.send("add-layer", {
+				"id" : "meteo-eeuu",
+				"label" : "Radar EEUU",
+				"active" : "true",
+				"timestamps" : "2010-03-01T00:00,2010-03-02T00:00,2010-03-03T00:00",
+				"date-format" : "DD-MM-YYYY",
+				"wmsLayers" : [{
+					"baseUrl" : "http://mesonet.agron.iastate.edu/cgi-bin/wms/nexrad/n0r-t.cgi",
+					"wmsName" : "nexrad-n0r-wmst"
+				}]
+			});
 		});
 	
 	});
