@@ -73,7 +73,7 @@ A continuación vamos a ver cómo el proyecto Geoladris permite el empaquetado d
 
 Hasta ahora hemos visto
 
-1. la instalación del portal de FAO en Tomcat, los normales que obtenemos al instalarlo y cómo solucionarlos,
+1. la instalación del portal de FAO en Tomcat, los problemas normales que obtenemos al instalarlo y cómo solucionarlos,
 2. la existencia de un árbol de elementos (HTML) y estilos (CSS),
 3. que programando Javascript podemos añadir interactividad,
 4. dos recomendaciones al trabajar con HTML, CSS y Javascript:
@@ -81,7 +81,7 @@ Hasta ahora hemos visto
     * Hay que separar los CSS del resto de cosas
     * Hay que evitar que los ficheros Javascript crezcan de forma descontrolada 
 
-5. y un modelo de aplicación que se apoya en RequireJS para tener todos estos conceptos separados y hemos visto que no es práctico.
+5. y un modelo de aplicación que se apoya en RequireJS para tener todos estos conceptos separados que hemos visto que no es práctico.
 
 Ahora vamos a ver cómo desde Geoladris tratamos de trabajar con los estándares del web, HTML, CSS y Javascript, apoyándonos en RequireJS y algún otro concepto para hacer las aplicaciones modulares y eliminando la problemática encontrada con RequireJS.  
 
@@ -146,6 +146,7 @@ Si nuestro hola mundo consiste en un elemento `h1` con un mensaje, tendremos que
 
 1. Crear un directorio para el plugin, que llamaremos "titulo": `sudo mkdir /var/geoladris/hola-geoladris/plugins/titulo`; dentro de este directorio tendremos la estructura descrita en el punto anterior con los directorios `modules/`, `styles/`, etc.
 2. En este caso sólo necesitamos crear un módulo, que llamaremos `h1-modulo` y meteremos en el directorio `modules/` con el siguiente contenido:
+
 
 	define([ "jquery" ], function($) {
 		$("<h1>")//
