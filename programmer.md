@@ -147,14 +147,13 @@ Si nuestro hola mundo consiste en un elemento `h1` con un mensaje, tendremos que
 1. Crear un directorio para el plugin, que llamaremos "titulo": `sudo mkdir /var/geoladris/hola-geoladris/plugins/titulo`; dentro de este directorio tendremos la estructura descrita en el punto anterior con los directorios `modules/`, `styles/`, etc.
 2. En este caso sólo necesitamos crear un módulo, que llamaremos `h1-modulo` y meteremos en el directorio `modules/` con el siguiente contenido:
 
-
-	define([ "jquery" ], function($) {
-		$("<h1>")//
-		.attr("id", "titulo")//
-		.html("Hola mundo")//
-		.appendTo("body");
-		// <h1 id="titulo">Hola mundo</h1>
-	});
+    define([ "jquery" ], function($) {
+        $("<h1>")//
+        .attr("id", "titulo")//
+        .html("Hola mundo")//
+        .appendTo("body");
+        // <h1 id="titulo">Hola mundo</h1>
+    });
 
 Una vez hecho esto, hay que reiniciar la aplicación `hola-geoladris` para que se reescanee el directorio `plugins` y se registre el módulo que hemos añadido:
 
