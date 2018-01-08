@@ -4,4 +4,4 @@ Hemos recopilado todos los recursos que nos pueden servir para la formación en 
 
 La idea es construir un guión para el curso con tres puntos (cliente, servidor, empaquetado/publicación), reutilizando lo que se pueda de los directorios ``resources_*`` y eliminando lo que esté obsoleto.
 
-Tenemos un [primer guión](index.md), orientativo y abierto a modificaciones.
+Tenemos un [primer guión](docs/index.md), orientativo y abierto a modificaciones.
