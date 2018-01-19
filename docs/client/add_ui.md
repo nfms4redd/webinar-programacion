@@ -51,8 +51,11 @@ define([ 'toolbar' ], function(toolbar) {
 Por último podemos añadir un fichero `botón.css` para dar estilo al botón:
 
 ```css
-#miboton {
+button.blue_button {
   border: 0;
+}
+
+#miboton {
   margin: 12px;
 }
 ```
