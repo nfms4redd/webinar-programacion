@@ -3,6 +3,7 @@ theme: 'material'
 markdown_extensions: [codehilite]
 pages:
 - Home: index.md
+- Preparación: setup.md
 - Cliente:
     - 'Hola mundo': client/hello_world.md
     - 'Añadir elementos a la interfaz': client/add_ui.md
