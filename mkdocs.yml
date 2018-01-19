@@ -7,6 +7,7 @@ pages:
 - Cliente:
     - 'Hola mundo': client/hello_world.md
     - 'Añadir elementos a la interfaz': client/add_ui.md
+    - 'Reutilizar funcionalidad': client/reuse.md
     - 'Manejar eventos': client/events.md
     - 'Añadir funcionalidad al mapa': client/add_map_functionality.md
 - Servidor:
