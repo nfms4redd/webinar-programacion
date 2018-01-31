@@ -153,7 +153,7 @@ define([ "message-bus", "botonera/crear", "map" ], function(bus, botonera, map) 
 });
 ```
 
-Ahora, deberíamos poder instalar nuestro plugin, empaquetar la aplicación y reiniciar el portal para poder utilizar nuestro botón enlazado con nuestro servlet.
+Por último, deberíamos poder instalar nuestro plugin, empaquetar la aplicación y reiniciar el portal para poder utilizar nuestro botón enlazado con nuestro servlet.
 
 ## Manejando errores
 
