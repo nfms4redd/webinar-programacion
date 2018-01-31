@@ -14,9 +14,4 @@ pages:
     - 'Hola mundo': server/hello_world.md
     - 'Servlet de configuración': server/config_servlet.md
     - 'Acceso a base de datos': server/db_servlet.md
-- Empaquetado y publicación:
-    - 'Empaquetar plugin cliente': deploy/client.md
-    - 'Empaquetar plugin servidor': deploy/server.md
-    - 'Crear una nueva aplicación': deploy/new_app.md
-    - 'Licencias': deploy/licenses.md
 
