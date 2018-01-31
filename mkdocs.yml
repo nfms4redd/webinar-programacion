@@ -2,7 +2,7 @@ site_name: Curso de programación de NFMS4REDD
 theme: 'material'
 markdown_extensions: [codehilite]
 pages:
-- Home: index.md
+- Índice: index.md
 - Preparación: setup.md
 - Cliente:
     - 'Hola mundo': client/hello_world.md
@@ -13,5 +13,5 @@ pages:
 - Servidor:
     - 'Hola mundo': server/hello_world.md
     - 'Servlet de configuración': server/config_servlet.md
-    - 'Acceso a base de datos': server/db_servlet.md
+    - 'Servlet de acceso a base de datos': server/db_servlet.md
 
