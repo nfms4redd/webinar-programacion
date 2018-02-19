@@ -14,4 +14,4 @@ pages:
     - 'Hola mundo': server/hello_world.md
     - 'Servlet de configuración': server/config_servlet.md
     - 'Servlet de acceso a base de datos': server/db_servlet.md
-
+- Ejercicios: exercises.md

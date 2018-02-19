@@ -13,10 +13,12 @@ En este curso se aprenderán a desarrollar nuevas funcionalidades para el portal
 	* [Añadir elementos a la interfaz](client/add_ui.md)
 	* [Reutilizar funcionalidad](client/reuse.md)
 	* [Manejar eventos](client/events.md)
-	* [Añadir funcionalidad al mapa](client/add_map_functionality.md)
+	* [Añadir funcionalidad al mapa](client/add_map_functionality.md).
 
 * Servidor
 
 	* [Hola mundo](server/hello_world.md)
 	* [Servlet de configuración](server/config_servlet.md)
 	* [Servlet de acceso a base de datos](server/db_servlet.md)
+
+* [Ejercicios](exercises.md)
