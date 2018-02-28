@@ -68,40 +68,28 @@ Llegados a este punto tenemos que empaquetar nuestro plugin y desplegarlo con el
 
 ```bash
 cd hola-mundo
-mvn install
+mvn package
 ```
 
-Posteriormente, modificaremos el fichero `pom.xml` de la aplicación `demo` del repositorio `apps` para incluir nuestro plugin:
-
-```xml
-  ...
-  <dependencies>
-    ...
-    <dependency>
-      <groupId>org.fao.unredd</groupId>
-      <artifactId>hola-mundo</artifactId>
-      <version>1.0-SNAPSHOT</version>
-    </dependency>
-  </dependencies>
-  ...
-```
-
-Finalmente, empaquetaremos la aplicación (esto puede tardar un poco) y la desplegaremos en nuestro entorno:
+Posteriormente, tendremos que copiar nuestro plugin en el directorio de plugins de la aplicación, dentro de Tomcat:
 
 ```bash
-cd ../demo
-mvn package -Dskip.yarn
-cp target/demo.war ../app/portal.war
-cd ..
-docker-compose restart
+cp target/hola-mundo-1.0-SNAPSHOT.jar ../portal/WEB-INF/lib
 ```
 
-Si hemos hecho todo correctamente será posible, previo reinicio del servidor, acceder a la URL [http://localhost/portal/holamundo](http://localhost/portal/holamundo) y obtener un error `405: Method Not Allowed` (método no permitido). Podemos comprobar que el mensaje es distinto si accedemos a una URL inexistente, como [http://localhost/portal/holamundonoexiste](http://localhost/portal/holamundonoexiste), donde obtenemos `404: Not Found` (no encontrado).
+y luego, reiniciaremos el portal:
+
+```bash
+cd ..
+docker-compose restart portal
+```
+
+Si hemos hecho todo correctamente será posible, previo reinicio del servidor, acceder a la URL [http://localhost/portal/holamundo](http://localhost:8082/portal/holamundo) y obtener un error `405: Method Not Allowed` (método no permitido). Podemos comprobar que el mensaje es distinto si accedemos a una URL inexistente, como [http://localhost/portal/holamundonoexiste](http://localhost:8082/portal/holamundonoexiste), donde obtenemos `404: Not Found` (no encontrado).
 
 Esto quiere decir que el servlet está bien instalado. Sólo hace falta implementar el método GET, que es el que está pidiendo el navegador:
 
 ```java
-package org.fao.unredd.portal;
+package org.fao.unredd;
 
 import java.io.IOException;
 
@@ -119,7 +107,7 @@ public class HolaMundoServlet extends HttpServlet{
 }
 ```
 
-Si volvemos a instalar en local, empaquetar y desplegar la aplicación, el servidor debe devolver una página en blanco, pero no debe dar un error. Se llega así al punto en el que leeremos el parámetro y en función de este devolveremos un XML o texto plano:
+Si volvemos a instalar en local, empaquetar y desplegar el plugin, el servidor debe devolver una página en blanco, pero no debe dar un error. Se llega así al punto en el que leeremos el parámetro y en función de este devolveremos un XML o texto plano:
 
 ```java
 package org.fao.unredd;

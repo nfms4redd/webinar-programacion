@@ -3,7 +3,7 @@ services:
   db:
     image: kartoza/postgis:9.6-2.4
     ports:
-      - "5432:5432"
+      - "65432:5432"
     environment:
       - POSTGRES_USER=admin
       - POSTGRES_PASS=admin
@@ -11,7 +11,7 @@ services:
   geoserver:
     image: oscarfonts/geoserver:2.12.1
     ports:
-      - "8080:8080"
+      - "8081:8080"
     depends_on:
       - db
     volumes:
@@ -19,12 +19,12 @@ services:
   portal:
     image: tomcat:8.5
     ports:
-      - "80:8080"
+      - "8082:8080"
     depends_on:
       - geoserver
     volumes:
       - "./geoladris:/var/local/geoladris"
-      - "./portal.war:/usr/local/portal.war"
+      - "./portal:/usr/local/portal"
       - "./context.xml:/usr/local/tomcat/conf/Catalina/localhost/portal.xml"
     environment:
       - GEOLADRIS_CONFIG_DIR=/var/local/geoladris

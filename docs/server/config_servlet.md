@@ -109,8 +109,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.geoladris.Geoladris;
+import org.geoladris.config.Config;
 
-public class GuardaCentroServlet extends HttpServlet {
+public class GuardarCentroServlet extends HttpServlet {
 
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -136,9 +137,9 @@ public class GuardaCentroServlet extends HttpServlet {
 Ahora, para probarlo tendremos que crear un plugin cliente con un botón que ,cuando se pulse, llame al servlet que acabamos de crear enviando el centro del mapa en ese momento. Bastará crear un nuevo plugin con el siguiente módulo (para más detalles ver apartados sobre [cliente](../client/hello_world.md)):
 
 ```js
-define([ "message-bus", "botonera/crear", "map" ], function(bus, botonera, map) {
-
+define([ "message-bus", "botonera/crear", "ol2/map" ], function(bus, botonera, olmap) {
   botonera("guardar centro", function() {
+    var map = olmap.getMap();
     var center = map.getCenter();
     center.transform(new OpenLayers.Projection("EPSG:900913"), new OpenLayers.Projection("EPSG:4326"));
     var zoomLevel = map.getZoom();
@@ -153,7 +154,7 @@ define([ "message-bus", "botonera/crear", "map" ], function(bus, botonera, map) 
 });
 ```
 
-Por último, deberíamos poder instalar nuestro plugin, empaquetar la aplicación y reiniciar el portal para poder utilizar nuestro botón enlazado con nuestro servlet.
+Por último, deberíamos poder instalar empaquetar nuestro plugin y reiniciar el portal para poder utilizar nuestro botón enlazado con nuestro servlet.
 
 ## Manejando errores
 
@@ -195,8 +196,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.geoladris.Geoladris;
+import org.geoladris.config.Config;
 
-public class GuardaCentroServlet extends HttpServlet {
+public class GuardarCentroServlet extends HttpServlet {
 
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -219,7 +221,7 @@ public class GuardaCentroServlet extends HttpServlet {
       properties.load(inputStream);
       inputStream.close();
     } catch (IOException e) {
-      resp.sendError(SC_INTERNAL_SERVER_ERROR, "Error grave en el servidor. Contacte al administrador");
+      resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error grave en el servidor. Contacte al administrador");
       return;
     }
 
@@ -232,7 +234,7 @@ public class GuardaCentroServlet extends HttpServlet {
       properties.store(outputStream, null);
       outputStream.close();
     } catch (IOException e) {
-      resp.sendError(SC_INTERNAL_SERVER_ERROR, "Error grave en el servidor. Contacte al administrador");
+      resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error grave en el servidor. Contacte al administrador");
       return;
     }
   }

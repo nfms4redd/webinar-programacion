@@ -7,13 +7,13 @@ Para ello, primero deberemos cargar las provincias en la base de datos. Nos desc
 Luego ejecutamos el comando para cargarlos en la base de datos:
 
 ```bash
-psql -h localhost -p 5432 -U admin -d nfms -f provincias.sql
+psql -h localhost -p 65432 -U admin -d nfms -f provincias.sql
 ```
 
 y comprobamos que se hayan cargado correctamente:
 
 ```bash
-psql -h localhost -p 5432 -U admin -d nfms -c 'SELECT COUNT(*) FROM provincias'
+psql -h localhost -p 65432 -U admin -d nfms -c 'SELECT COUNT(*) FROM provincias'
 ```
 
 ## Creando el proyecto
@@ -21,7 +21,7 @@ psql -h localhost -p 5432 -U admin -d nfms -c 'SELECT COUNT(*) FROM provincias'
 De nuevo, creamos el proyecto  y la configuración de nuestro servlet:
 
 ```bash
-$ mvn archetype:generate -DgroupId=org.fao.unredd -DartifactId=guardar-centro -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+$ mvn archetype:generate -DgroupId=org.fao.unredd -DartifactId=provincias -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
 ```
 
 con su configuración en el fichero `pom.xml`:
@@ -211,7 +211,20 @@ define([ "message-bus" ], function(bus) {
 y los siguientes estilos:
 
 ```css
+div#lista_provincias {
+    position: fixed;
+    bottom: 25;
+    padding: 10px;
+    left: 0;
+    z-index: 999;
+    background: white;
+    max-height: 200px;
+    overflow-y: auto;
+}
 
+div#lista_provincias>div {
+    padding: 10px;
+}
 ```
 
 Por último, deberíamos poder instalar nuestro plugin, empaquetar la aplicación y reiniciar el portal para poder utilizar nuestro botón enlazado con nuestro servlet.

@@ -79,12 +79,12 @@ mkdir nfms/geoladris
 
 Después, habrá que descargarse los siguientes ficheros y copiarlos en el directorio de trabajo:
 
-* [docker-compose.yml](https://nfms4redd.github.io/webinar-programacion/static/docker-compose.yml)
-* [context.xml](https://nfms4redd.github.io/webinar-programacion/static/context.xml)
-* [portal.zip](https://nfms4redd.github.io/webinar-programacion/static/portal.zip)
-* [demo.war](https://oss.sonatype.org/content/repositories/snapshots/com/github/geoladris/apps/demo/7.0.0-SNAPSHOT/demo-7.0.0-20180115.121345-1.war)
+* [docker-compose.yml](static/docker-compose.yml)
+* [context.xml](static/context.xml)
+* [portal.zip](static/portal.zip)
+* [demo.war](https://repo1.maven.org/maven2/com/github/geoladris/apps/demo/7.0.0/demo-7.0.0.war)
 
-Tras la descarga, habrá que renombrar el fichero `demo-*.war` a `portal.war` y descomprimir el fichero `portal.zip` dentro del directorio de configuración `geoladris`. El resultado debería ser el siguiente:
+Tras la descarga, habrá que descomprimir el fichero `demo-*.war` (realmente es un fichero `.zip` con la extensión cambiada) en un directorio `portal` y descomprimir el fichero `portal.zip` dentro del directorio de configuración `geoladris`. El resultado debería ser el siguiente:
 
 ![](static/workdir.png)
 
@@ -92,14 +92,14 @@ Finalmente, bastará con arrancar el sistema con `docker-compose`:
 
 ```bash
 cd ~/nfms
-docker-compose up
+docker-compose up -d
 ```
 
 O, en Windows, arrancando `Docker for Windows/Docker Toolbox`:
 
 ```bash
-cd <whatever>
-docker-compose up
+cd <directorio>
+docker-compose up -d
 ```
 
-Para comprobar que la instalación y el arranque se han completado con éxito podemos acceder al portal en [http://localhost/portal](http://localhost/portal) y a GeoServer en [http://localhost:8080/geoserver](http://localhost:8080/geoserver).
+Para comprobar que la instalación y el arranque se han completado con éxito podemos acceder al portal en [http://localhost:8082/portal](http://localhost:8082/portal) y a GeoServer en [http://localhost:8081/geoserver](http://localhost:8081/geoserver).
