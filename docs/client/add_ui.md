@@ -32,7 +32,7 @@ define([ 'toolbar' ], function(toolbar) {
 
 Si hemos hecho todos los pasos correctamente, veremos que la barra de herramientas no aparece, ya que la hemos escondido en nuestro módulo.
 
-Lo único que queda por hacer es reemplazar el código de prueba anterior por otro que cree un botón. Esto lo podemos hacer creando un tag ``<button>`` con jQuery::
+Lo único que queda por hacer es reemplazar el código de prueba anterior por otro que cree un botón. Esto lo podemos hacer creando un tag ``<button>`` con jQuery:
 
 ```js
 define([ 'toolbar' ], function(toolbar) {
