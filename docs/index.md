@@ -20,5 +20,6 @@ En este curso se aprenderán a desarrollar nuevas funcionalidades para el portal
 	* [Hola mundo](server/hello_world.md)
 	* [Servlet de configuración](server/config_servlet.md)
 	* [Servlet de acceso a base de datos](server/db_servlet.md)
+	* [Consideraciones sobre el despliegue](server/deploy_considerations.md)
 
 * [Ejercicios](exercises.md)
