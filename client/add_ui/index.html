@@ -1,0 +1,525 @@
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+      
+      
+        <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      
+      <meta name="generator" content="mkdocs-0.16.2, mkdocs-material-1.7.5">
+    
+    
+      
+        <title>Añadir elementos a la interfaz - Curso de programación de NFMS4REDD</title>
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr-1df76c4e58.js"></script>
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application-769c285a91.css">
+      
+    
+    
+      
+        
+        
+        
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+      <link rel="stylesheet" href="../../static/exercises/map-scale.css">
+    
+      <link rel="stylesheet" href="../../static/exercises/new-group-layer.css">
+    
+      <link rel="stylesheet" href="../../static/exercises/temperature.css">
+    
+      <link rel="stylesheet" href="../../static/exercises/wfs-query.css">
+    
+      <link rel="stylesheet" href="../../static/exercises/zoom-panel.css">
+    
+      <link rel="stylesheet" href="../../static/exercises/zoomto.css">
+    
+    
+  </head>
+  
+  
+  
+  
+    <body>
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <a href="../.." title="Curso de programación de NFMS4REDD" class="md-icon md-icon--home md-header-nav__button">
+          </a>
+        
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <span class="md-flex__ellipsis md-header-nav__title">
+          
+            
+              
+                <span class="md-header-nav__parent">
+                  Cliente
+                </span>
+              
+            
+            Añadir elementos a la interfaz
+          
+        </span>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" required placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset">close</button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result" data-md-lang-search="">
+          <div class="md-search-result__meta" data-md-lang-result-none="No matching documents" data-md-lang-result-one="1 matching document" data-md-lang-result-other="# matching documents">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    
+      <i class="md-icon md-icon--home md-nav__button"></i>
+    
+    Curso de programación de NFMS4REDD
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Índice" class="md-nav__link">
+      Índice
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../setup/" title="Preparación" class="md-nav__link">
+      Preparación
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      Cliente
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Cliente
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../hello_world/" title="Hola mundo" class="md-nav__link">
+      Hola mundo
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+    
+    <a href="./" title="Añadir elementos a la interfaz" class="md-nav__link md-nav__link--active">
+      Añadir elementos a la interfaz
+    </a>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../reuse/" title="Reutilizar funcionalidad" class="md-nav__link">
+      Reutilizar funcionalidad
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../events/" title="Manejar eventos" class="md-nav__link">
+      Manejar eventos
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../add_map_functionality/" title="Añadir funcionalidad al mapa" class="md-nav__link">
+      Añadir funcionalidad al mapa
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Servidor
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Servidor
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../server/hello_world/" title="Hola mundo" class="md-nav__link">
+      Hola mundo
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../server/config_servlet/" title="Servlet de configuración" class="md-nav__link">
+      Servlet de configuración
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../server/db_servlet/" title="Servlet de acceso a base de datos" class="md-nav__link">
+      Servlet de acceso a base de datos
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../server/deploy_considerations/" title="Consideraciones sobre el despliegue" class="md-nav__link">
+      Consideraciones sobre el despliegue
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../exercises/" title="Ejercicios" class="md-nav__link">
+      Ejercicios
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>Añadir elementos a la interfaz</h1>
+                
+                <p>En este caso vamos a añadir un nuevo botón a la barra de herramientas del portal, que cuando se pulse muestre una alerta. Para ello crearemos un plugin llamado <code>boton</code>:</p>
+<div class="codehilite"><pre><span></span>mkdir -p geoladris/portal/plugins/boton/src
+</pre></div>
+
+
+<p>Y crearemos un fichero <code>boton.js</code> vacío.</p>
+<p>Para poder añadir el botón necesitamos obtener el elemento HTML de la barra de herramientas. Este elemento lo podemos obtener mediante el módulo del plugin  <a href="https://github.com/geoladris/plugins/blob/master/base/src/toolbar.js">toolbar</a>. Si nos fijamos en el módulo, podemos ver que devuelve un objeto jQuery con el elemento:</p>
+<div class="codehilite"><pre><span></span>  <span class="p">...</span>
+  <span class="k">return</span> <span class="nx">divToolbar</span><span class="p">;</span>
+<span class="p">});</span>
+</pre></div>
+
+
+<p>Puesto que el portal funciona con <a href="http://requirejs.org/">RequireJS</a>, bastará con definir nuestro módulo con <code>toolbar</code> como dependencia:</p>
+<div class="codehilite"><pre><span></span><span class="nx">define</span><span class="p">([</span> <span class="s1">&#39;toolbar&#39;</span> <span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">toolbar</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// Aquí podemos utilizar toolbar como el objeto jQuery devuelto por el módulo</span>
+<span class="p">});</span>
+</pre></div>
+
+
+<p>En este punto podríamos realizar una prueba para comprobar que tenemos una referencia válida al elemento. El siguiente código hace invisible la barra de herramientas:</p>
+<div class="codehilite"><pre><span></span><span class="nx">define</span><span class="p">([</span> <span class="s1">&#39;toolbar&#39;</span> <span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">toolbar</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">toolbar</span><span class="p">.</span><span class="nx">hide</span><span class="p">();</span>
+<span class="p">});</span>
+</pre></div>
+
+
+<p>Si hemos hecho todos los pasos correctamente, veremos que la barra de herramientas no aparece, ya que la hemos escondido en nuestro módulo.</p>
+<p>Lo único que queda por hacer es reemplazar el código de prueba anterior por otro que cree un botón. Esto lo podemos hacer creando un tag <code>&lt;button&gt;</code> con jQuery:</p>
+<div class="codehilite"><pre><span></span><span class="nx">define</span><span class="p">([</span> <span class="s1">&#39;toolbar&#39;</span> <span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">toolbar</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">button</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;button&#39;</span><span class="p">);</span>
+  <span class="nx">button</span><span class="p">.</span><span class="nx">id</span> <span class="o">=</span> <span class="s1">&#39;miboton&#39;</span><span class="p">;</span>
+  <span class="nx">button</span><span class="p">.</span><span class="nx">className</span> <span class="o">=</span> <span class="s1">&#39;blue_button&#39;</span><span class="p">;</span>
+  <span class="nx">button</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s1">&#39;Púlsame&#39;</span><span class="p">;</span>
+  <span class="nx">button</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;Botón pulsado&#39;</span><span class="p">);</span>
+  <span class="p">});</span>
+
+  <span class="nx">toolbar</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">button</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+
+
+<p>Por último podemos añadir un fichero <code>botón.css</code> para dar estilo al botón:</p>
+<div class="codehilite"><pre><span></span><span class="nt">button</span><span class="p">.</span><span class="nc">blue_button</span> <span class="p">{</span>
+  <span class="k">border</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">#</span><span class="nn">miboton</span> <span class="p">{</span>
+  <span class="k">margin</span><span class="p">:</span> <span class="mi">12</span><span class="kt">px</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+                
+                  
+                
+              
+              
+                
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../hello_world/" title="Hola mundo" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Hola mundo
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../reuse/" title="Reutilizar funcionalidad" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Reutilizar funcionalidad
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="http://www.mkdocs.org" title="MkDocs">MkDocs</a>
+        and
+        <a href="http://squidfunk.github.io/mkdocs-material/" title="Material for MkDocs">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application-07b0fbb49b.js"></script>
+      
+      
+      <script>app.initialize({url:{base:"../.."}})</script>
+      
+        <script src="../../static/exercises/filter.js"></script>
+      
+        <script src="../../static/exercises/map-scale.js"></script>
+      
+        <script src="../../static/exercises/measure.js"></script>
+      
+        <script src="../../static/exercises/new-group-layer.js"></script>
+      
+        <script src="../../static/exercises/temperature.js"></script>
+      
+        <script src="../../static/exercises/wfs-query.js"></script>
+      
+        <script src="../../static/exercises/zoom-panel-install-button.js"></script>
+      
+        <script src="../../static/exercises/zoom-panel.js"></script>
+      
+        <script src="../../static/exercises/zoomto.js"></script>
+      
+    
+    
+      
+    
+  </body>
+</html>
