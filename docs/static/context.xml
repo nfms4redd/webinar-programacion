@@ -15,7 +15,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 --><!-- The contents of this file will be loaded for each web application -->
-<Context docBase="/usr/local/portal.war" copyXML="true" mapperContextRootRedirectEnabled="true">
+<Context docBase="/usr/local/portal" copyXML="true" mapperContextRootRedirectEnabled="true">
 
     <!-- Default set of monitored resources -->
     <WatchedResource>WEB-INF/web.xml</WatchedResource>
