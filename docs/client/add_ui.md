@@ -48,6 +48,23 @@ define([ 'toolbar' ], function(toolbar) {
 });
 ```
 
+Además, si queremos añadir multidioma a nuestro botón, existe el módulo `i18n` que podemos poner como dependencia y que contiene las traducciones de los ficheros `messages.properties` del directorio de configuración:
+
+```js
+define([ 'toolbar', 'i18n' ], function(toolbar, i18n) {
+  ...
+  button.innerHTML = i18n['boton_webinar'];
+  ...
+});
+```
+
+Luego, bastará con añadir la traducción a los ficheros `messages.properties` en el directorio de configuración:
+
+```bash
+...
+boton_webinar=Button
+```
+
 Por último podemos añadir un fichero `botón.css` para dar estilo al botón:
 
 ```css
