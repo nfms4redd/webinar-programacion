@@ -10,6 +10,7 @@ pages:
     - 'Reutilizar funcionalidad': client/reuse.md
     - 'Manejar eventos': client/events.md
     - 'Añadir funcionalidad al mapa': client/add_map_functionality.md
+    - 'Configuración de los módulos': client/module_configuration.md
 - Servidor:
     - 'Hola mundo': server/hello_world.md
     - 'Servlet de configuración': server/config_servlet.md
