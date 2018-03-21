@@ -65,30 +65,19 @@ Si el sistema operativo no se encuentra entre los anteriores, habrá que dirigir
 
 ## Arrancar el sistema
 
-En primer lugar deberemos crear nuestro directorio de trabajo, que incluye subdirectorios para GeoServer y el portal. Por ejemplo:
-
-```bash
-cd
-mkdir nfms
-mkdir nfms/geoserver
-mkdir nfms/geoladris
-```
-
-> **NOTA**: A lo largo de esta documentación se incluirán únicamente los comandos `mkdir` de Linux, asumiendo que en Windows se crean mediante el explorador de archivos.
-
-
-Después, habrá que descargarse los siguientes ficheros y copiarlos en el directorio de trabajo:
-
-* [docker-compose.yml](static/docker-compose.yml)
-* [context.xml](static/context.xml)
-* [portal.zip](static/portal.zip)
-* [demo.war](https://repo1.maven.org/maven2/com/github/geoladris/apps/demo/7.0.0/demo-7.0.0.war)
-
-Tras la descarga, habrá que descomprimir el fichero `demo-*.war` (realmente es un fichero `.zip` con la extensión cambiada) en un directorio `portal` y descomprimir el fichero `portal.zip` dentro del directorio de configuración `geoladris`. El resultado debería ser el siguiente:
+Primero deberemos descargarnos y descomprimir un **[paquete](static/docker.zip)** con todos los ficheros necesarios para arrancar el sistema con `docker-compose`. El resultado debería ser el siguiente:
 
 ![](static/workdir.png)
 
-Finalmente, bastará con arrancar el sistema con `docker-compose`:
+Podemos observar los siguientes ficheros y directorios:
+
+* `geoladris`: [Directorio de configuración](https://geoladris.github.io/doc/user/config/#directorio-de-configuracion) del portal.
+* `geoserver`: [Directorio de datos](http://docs.geoserver.org/stable/en/user/datadirectory/index.html) de GeoServer.
+* `portal`: El portal. Es una aplicación Tomcat (`.war`) descomprimida.
+* `context.xml`: Fichero de configuración para Tomcat.
+* `docker-compose.yml`: Fichero de configuración para `docker-compose`.
+
+Posteriormente, bastará con arrancar el sistema con `docker-compose`:
 
 ```bash
 cd ~/nfms
