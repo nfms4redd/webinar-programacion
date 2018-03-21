@@ -343,6 +343,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../client/module_configuration/" title="Configuración de los módulos" class="md-nav__link">
+      Configuración de los módulos
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -591,27 +603,17 @@ docker-compose --version
 <h3 id="otros-sistemas-operativos">Otros sistemas operativos</h3>
 <p>Si el sistema operativo no se encuentra entre los anteriores, habrá que dirigirse a la <a href="https://docs.docker.com/compose/install/">documentación</a> de Docker.</p>
 <h2 id="arrancar-el-sistema">Arrancar el sistema</h2>
-<p>En primer lugar deberemos crear nuestro directorio de trabajo, que incluye subdirectorios para GeoServer y el portal. Por ejemplo:</p>
-<div class="codehilite"><pre><span></span><span class="nb">cd</span>
-mkdir nfms
-mkdir nfms/geoserver
-mkdir nfms/geoladris
-</pre></div>
-
-
-<blockquote>
-<p><strong>NOTA</strong>: A lo largo de esta documentación se incluirán únicamente los comandos <code>mkdir</code> de Linux, asumiendo que en Windows se crean mediante el explorador de archivos.</p>
-</blockquote>
-<p>Después, habrá que descargarse los siguientes ficheros y copiarlos en el directorio de trabajo:</p>
-<ul>
-<li><a href="../static/docker-compose.yml">docker-compose.yml</a></li>
-<li><a href="../static/context.xml">context.xml</a></li>
-<li><a href="../static/portal.zip">portal.zip</a></li>
-<li><a href="https://repo1.maven.org/maven2/com/github/geoladris/apps/demo/7.0.0/demo-7.0.0.war">demo.war</a></li>
-</ul>
-<p>Tras la descarga, habrá que descomprimir el fichero <code>demo-*.war</code> (realmente es un fichero <code>.zip</code> con la extensión cambiada) en un directorio <code>portal</code> y descomprimir el fichero <code>portal.zip</code> dentro del directorio de configuración <code>geoladris</code>. El resultado debería ser el siguiente:</p>
+<p>Primero deberemos descargarnos y descomprimir un <strong><a href="../static/docker.zip">paquete</a></strong> con todos los ficheros necesarios para arrancar el sistema con <code>docker-compose</code>. El resultado debería ser el siguiente:</p>
 <p><img alt="" src="../static/workdir.png" /></p>
-<p>Finalmente, bastará con arrancar el sistema con <code>docker-compose</code>:</p>
+<p>Podemos observar los siguientes ficheros y directorios:</p>
+<ul>
+<li><code>geoladris</code>: <a href="https://geoladris.github.io/doc/user/config/#directorio-de-configuracion">Directorio de configuración</a> del portal.</li>
+<li><code>geoserver</code>: <a href="http://docs.geoserver.org/stable/en/user/datadirectory/index.html">Directorio de datos</a> de GeoServer.</li>
+<li><code>portal</code>: El portal. Es una aplicación Tomcat (<code>.war</code>) descomprimida.</li>
+<li><code>context.xml</code>: Fichero de configuración para Tomcat.</li>
+<li><code>docker-compose.yml</code>: Fichero de configuración para <code>docker-compose</code>.</li>
+</ul>
+<p>Posteriormente, bastará con arrancar el sistema con <code>docker-compose</code>:</p>
 <div class="codehilite"><pre><span></span><span class="nb">cd</span> ~/nfms
 docker-compose up -d
 </pre></div>

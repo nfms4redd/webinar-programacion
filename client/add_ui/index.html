@@ -256,6 +256,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../module_configuration/" title="Configuración de los módulos" class="md-nav__link">
+      Configuración de los módulos
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -413,6 +425,21 @@
 
   <span class="nx">toolbar</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">button</span><span class="p">);</span>
 <span class="p">});</span>
+</pre></div>
+
+
+<p>Además, si queremos añadir multidioma a nuestro botón, existe el módulo <code>i18n</code> que podemos poner como dependencia y que contiene las traducciones de los ficheros <code>messages.properties</code> del directorio de configuración:</p>
+<div class="codehilite"><pre><span></span><span class="nx">define</span><span class="p">([</span> <span class="s1">&#39;toolbar&#39;</span><span class="p">,</span> <span class="s1">&#39;i18n&#39;</span> <span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">toolbar</span><span class="p">,</span> <span class="nx">i18n</span><span class="p">)</span> <span class="p">{</span>
+  <span class="p">...</span>
+  <span class="nx">button</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">i18n</span><span class="p">[</span><span class="s1">&#39;boton_webinar&#39;</span><span class="p">];</span>
+  <span class="p">...</span>
+<span class="p">});</span>
+</pre></div>
+
+
+<p>Luego, bastará con añadir la traducción a los ficheros <code>messages.properties</code> en el directorio de configuración:</p>
+<div class="codehilite"><pre><span></span>...
+<span class="nv">boton_webinar</span><span class="o">=</span>Button
 </pre></div>
 
 
