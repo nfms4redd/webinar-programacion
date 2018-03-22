@@ -1,13 +1,25 @@
-define([ "botonera", "map", "message-bus" ], function(botonera, map, bus) {
+define([ "botonera/crear", "message-bus", "ol2/controlRegistry" ], function(crear, bus, controlRegistry) {
+    controlRegistry.registerControl('measure', function(message) {
+        var control = new OpenLayers.Control.Measure(OpenLayers.Handler.Path);
+        control.events.on({
+	        "measure" : function(evt) {
+		        alert(evt.measure + " " + evt.units);
+	        }
+        });
+        return control;
+    });
 
-	var control = new OpenLayers.Control.Measure(OpenLayers.Handler.Path);
-	control.events.on({
-		"measure" : function(evt) {
-			alert(evt.measure + " " + evt.units);
-		}
-	});
+    bus.listen('modules-loaded', function() {
+        bus.send('map:createControl', {
+            'controlId': 'measure',
+            'controlType': 'measure'
+        });
+    });
 
-	botonera.newButton("medir", function() {
-		bus.send("activate-exclusive-control", control);
-	});
+    crear("medir", function() {
+        bus.send("activate-exclusive-control", {
+            controlIds: ['measure']
+        });
+    });
 });
+

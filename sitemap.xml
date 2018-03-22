@@ -4,7 +4,7 @@
     
     <url>
      <loc>/</loc>
-     <lastmod>2018-03-21</lastmod>
+     <lastmod>2018-03-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -12,7 +12,7 @@
     
     <url>
      <loc>/setup/</loc>
-     <lastmod>2018-03-21</lastmod>
+     <lastmod>2018-03-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -21,37 +21,37 @@
         
     <url>
      <loc>/client/hello_world/</loc>
-     <lastmod>2018-03-21</lastmod>
+     <lastmod>2018-03-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/client/add_ui/</loc>
-     <lastmod>2018-03-21</lastmod>
+     <lastmod>2018-03-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/client/reuse/</loc>
-     <lastmod>2018-03-21</lastmod>
+     <lastmod>2018-03-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/client/events/</loc>
-     <lastmod>2018-03-21</lastmod>
+     <lastmod>2018-03-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/client/add_map_functionality/</loc>
-     <lastmod>2018-03-21</lastmod>
+     <lastmod>2018-03-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/client/module_configuration/</loc>
-     <lastmod>2018-03-21</lastmod>
+     <lastmod>2018-03-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -61,25 +61,25 @@
         
     <url>
      <loc>/server/hello_world/</loc>
-     <lastmod>2018-03-21</lastmod>
+     <lastmod>2018-03-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/server/config_servlet/</loc>
-     <lastmod>2018-03-21</lastmod>
+     <lastmod>2018-03-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/server/db_servlet/</loc>
-     <lastmod>2018-03-21</lastmod>
+     <lastmod>2018-03-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/server/deploy_considerations/</loc>
-     <lastmod>2018-03-21</lastmod>
+     <lastmod>2018-03-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -88,7 +88,7 @@
     
     <url>
      <loc>/exercises/</loc>
-     <lastmod>2018-03-21</lastmod>
+     <lastmod>2018-03-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
     

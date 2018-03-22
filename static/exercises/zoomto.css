@@ -1,9 +1,4 @@
-#txtLat {
-	margin-left: 415px;
-	margin-top: 12px;
-	width: 5em;
+#txtLat, #txtLon {
+	width: 6em;
 }
 
-#txtLon {
-	width: 5em;
-}

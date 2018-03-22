@@ -37,13 +37,7 @@
       <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     
     
-      <link rel="stylesheet" href="../../static/exercises/map-scale.css">
-    
-      <link rel="stylesheet" href="../../static/exercises/new-group-layer.css">
-    
       <link rel="stylesheet" href="../../static/exercises/temperature.css">
-    
-      <link rel="stylesheet" href="../../static/exercises/wfs-query.css">
     
       <link rel="stylesheet" href="../../static/exercises/zoom-panel.css">
     
@@ -605,6 +599,7 @@
 <span class="kn">import</span> <span class="nn">java.sql.SQLException</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.sql.Statement</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">javax.naming.InitialContext</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">javax.naming.NamingException</span><span class="o">;</span>
@@ -616,7 +611,7 @@
 
 <span class="kn">import</span> <span class="nn">net.sf.json.JSONSerializer</span><span class="o">;</span>
 
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ProvinciasDBServlet</span> <span class="kd">extends</span> <span class="n">HttpServlet</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ProvinciasServlet</span> <span class="kd">extends</span> <span class="n">HttpServlet</span> <span class="o">{</span>
 <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">long</span> <span class="n">serialVersionUID</span> <span class="o">=</span> <span class="mi">1L</span><span class="o">;</span>
 
   <span class="nd">@Override</span>
@@ -626,7 +621,7 @@
     <span class="n">DataSource</span> <span class="n">dataSource</span><span class="o">;</span>
     <span class="k">try</span> <span class="o">{</span>
       <span class="n">context</span> <span class="o">=</span> <span class="k">new</span> <span class="n">InitialContext</span><span class="o">();</span>
-      <span class="n">dataSource</span> <span class="o">=</span> <span class="o">(</span><span class="n">DataSource</span><span class="o">)</span> <span class="n">context</span><span class="o">.</span><span class="na">lookup</span><span class="o">(</span><span class="s">&quot;java:/comp/env/jdbc/nfms&quot;</span><span class="o">);</span>
+      <span class="n">dataSource</span> <span class="o">=</span> <span class="o">(</span><span class="n">DataSource</span><span class="o">)</span> <span class="n">context</span><span class="o">.</span><span class="na">lookup</span><span class="o">(</span><span class="s">&quot;java:/comp/env/jdbc/geoladris&quot;</span><span class="o">);</span>
     <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">NamingException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
       <span class="k">throw</span> <span class="k">new</span> <span class="n">ServletException</span><span class="o">(</span><span class="s">&quot;Problema en la configuración&quot;</span><span class="o">);</span>
     <span class="o">}</span>
@@ -637,7 +632,7 @@
       <span class="n">Statement</span> <span class="n">statement</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="na">createStatement</span><span class="o">();</span>
       <span class="n">ResultSet</span> <span class="n">result</span> <span class="o">=</span> <span class="n">statement</span><span class="o">.</span><span class="na">executeQuery</span><span class="o">(</span><span class="s">&quot;SELECT fna FROM provincias&quot;</span><span class="o">);</span>
       <span class="k">while</span> <span class="o">(</span><span class="n">result</span><span class="o">.</span><span class="na">next</span><span class="o">())</span> <span class="o">{</span>
-        <span class="n">provincias</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">result</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">&quot;name_1&quot;</span><span class="o">));</span>
+        <span class="n">provincias</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">result</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">&quot;fna&quot;</span><span class="o">));</span>
       <span class="o">}</span>
 
       <span class="n">resp</span><span class="o">.</span><span class="na">setContentType</span><span class="o">(</span><span class="s">&quot;application/json&quot;</span><span class="o">);</span>
@@ -665,8 +660,7 @@
   <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">list</span><span class="p">);</span>
   <span class="nx">bus</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s2">&quot;ajax&quot;</span><span class="p">,</span> <span class="p">{</span>
     <span class="nx">url</span> <span class="o">:</span> <span class="s2">&quot;provincias&quot;</span><span class="p">,</span>
-    <span class="nx">success</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">json</span><span class="p">,</span> <span class="nx">textStatus</span><span class="p">,</span> <span class="nx">jqXHR</span><span class="p">)</span> <span class="p">{</span>
-      <span class="kd">var</span> <span class="nx">provincias</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">json</span><span class="p">);</span>
+    <span class="nx">success</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">provincias</span><span class="p">,</span> <span class="nx">textStatus</span><span class="p">,</span> <span class="nx">jqXHR</span><span class="p">)</span> <span class="p">{</span>
       <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">provincias</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
         <span class="kd">var</span> <span class="nx">div</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">);</span>
         <span class="nx">div</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">provincias</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
@@ -775,17 +769,11 @@
       
         <script src="../../static/exercises/filter.js"></script>
       
-        <script src="../../static/exercises/map-scale.js"></script>
-      
         <script src="../../static/exercises/measure.js"></script>
       
         <script src="../../static/exercises/new-group-layer.js"></script>
       
         <script src="../../static/exercises/temperature.js"></script>
-      
-        <script src="../../static/exercises/wfs-query.js"></script>
-      
-        <script src="../../static/exercises/zoom-panel-install-button.js"></script>
       
         <script src="../../static/exercises/zoom-panel.js"></script>
       

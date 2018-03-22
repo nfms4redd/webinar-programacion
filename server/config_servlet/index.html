@@ -37,13 +37,7 @@
       <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     
     
-      <link rel="stylesheet" href="../../static/exercises/map-scale.css">
-    
-      <link rel="stylesheet" href="../../static/exercises/new-group-layer.css">
-    
       <link rel="stylesheet" href="../../static/exercises/temperature.css">
-    
-      <link rel="stylesheet" href="../../static/exercises/wfs-query.css">
     
       <link rel="stylesheet" href="../../static/exercises/zoom-panel.css">
     
@@ -574,7 +568,7 @@
 </pre></div>
 
 
-<p>Ahora, para probarlo tendremos que crear un plugin cliente con un botón que ,cuando se pulse, llame al servlet que acabamos de crear enviando el centro del mapa en ese momento. Bastará crear un nuevo plugin con el siguiente módulo (para más detalles ver apartados sobre <a href="../../client/hello_world/">cliente</a>):</p>
+<p>Ahora, para probarlo tendremos que crear un plugin cliente con un botón que,  cuando se pulse, llame al servlet que acabamos de crear enviando el centro del mapa en ese momento. Bastará crear un nuevo plugin con el siguiente módulo (para más detalles ver apartados sobre <a href="../../client/hello_world/">cliente</a>):</p>
 <div class="codehilite"><pre><span></span><span class="nx">define</span><span class="p">([</span> <span class="s2">&quot;message-bus&quot;</span><span class="p">,</span> <span class="s2">&quot;botonera/crear&quot;</span><span class="p">,</span> <span class="s2">&quot;ol2/map&quot;</span> <span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">bus</span><span class="p">,</span> <span class="nx">botonera</span><span class="p">,</span> <span class="nx">olmap</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">botonera</span><span class="p">(</span><span class="s2">&quot;guardar centro&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">map</span> <span class="o">=</span> <span class="nx">olmap</span><span class="p">.</span><span class="nx">getMap</span><span class="p">();</span>
@@ -593,7 +587,7 @@
 </pre></div>
 
 
-<p>Por último, deberíamos poder instalar empaquetar nuestro plugin y reiniciar el portal para poder utilizar nuestro botón enlazado con nuestro servlet.</p>
+<p>Por último, deberíamos poder empaquetar y desplegar nuestro plugin y luego reiniciar el portal para poder utilizar nuestro botón enlazado con nuestro servlet.</p>
 <h2 id="manejando-errores">Manejando errores</h2>
 <p>El servlet anterior parte de la base de que las peticiones que se hagan van a ser satisfactorias, se va a guardar el centro. Pero en la realidad esto no es la norma general. ¿Qué sucede si la petición no incluye los parámetros <code>lon</code>, <code>lat</code>, o <code>zoomLevel</code>? ¿Qué pasa si el fichero <code>portal.properties</code> ha sido eliminado?</p>
 <p>El estándar HTML define una serie de códigos que pueden ayudar en la comunicación de estas condiciones excepcionales:</p>
@@ -748,17 +742,11 @@
       
         <script src="../../static/exercises/filter.js"></script>
       
-        <script src="../../static/exercises/map-scale.js"></script>
-      
         <script src="../../static/exercises/measure.js"></script>
       
         <script src="../../static/exercises/new-group-layer.js"></script>
       
         <script src="../../static/exercises/temperature.js"></script>
-      
-        <script src="../../static/exercises/wfs-query.js"></script>
-      
-        <script src="../../static/exercises/zoom-panel-install-button.js"></script>
       
         <script src="../../static/exercises/zoom-panel.js"></script>
       

@@ -37,13 +37,7 @@
       <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     
     
-      <link rel="stylesheet" href="../../static/exercises/map-scale.css">
-    
-      <link rel="stylesheet" href="../../static/exercises/new-group-layer.css">
-    
       <link rel="stylesheet" href="../../static/exercises/temperature.css">
-    
-      <link rel="stylesheet" href="../../static/exercises/wfs-query.css">
     
       <link rel="stylesheet" href="../../static/exercises/zoom-panel.css">
     
@@ -510,7 +504,7 @@ docker-compose restart portal
 </pre></div>
 
 
-<p>Si hemos hecho todo correctamente será posible, previo reinicio del servidor, acceder a la URL <a href="http://localhost:8082/portal/holamundo">http://localhost/portal/holamundo</a> y obtener un error <code>405: Method Not Allowed</code> (método no permitido). Podemos comprobar que el mensaje es distinto si accedemos a una URL inexistente, como <a href="http://localhost:8082/portal/holamundonoexiste">http://localhost/portal/holamundonoexiste</a>, donde obtenemos <code>404: Not Found</code> (no encontrado).</p>
+<p>Si hemos hecho todo correctamente será posible, previo reinicio del servidor, acceder a la URL <a href="http://localhost:8082/portal/holamundo">http://localhost:8082/portal/holamundo</a> y obtener un error <code>405: Method Not Allowed</code> (método no permitido). Podemos comprobar que el mensaje es distinto si accedemos a una URL inexistente, como <a href="http://localhost:8082/portal/holamundonoexiste">http://localhost:8082/portal/holamundonoexiste</a>, donde obtenemos <code>404: Not Found</code> (no encontrado).</p>
 <p>Esto quiere decir que el servlet está bien instalado. Sólo hace falta implementar el método GET, que es el que está pidiendo el navegador:</p>
 <div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nn">org.fao.unredd</span><span class="o">;</span>
 
@@ -634,17 +628,11 @@ docker-compose restart portal
       
         <script src="../../static/exercises/filter.js"></script>
       
-        <script src="../../static/exercises/map-scale.js"></script>
-      
         <script src="../../static/exercises/measure.js"></script>
       
         <script src="../../static/exercises/new-group-layer.js"></script>
       
         <script src="../../static/exercises/temperature.js"></script>
-      
-        <script src="../../static/exercises/wfs-query.js"></script>
-      
-        <script src="../../static/exercises/zoom-panel-install-button.js"></script>
       
         <script src="../../static/exercises/zoom-panel.js"></script>
       

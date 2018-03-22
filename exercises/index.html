@@ -37,13 +37,7 @@
       <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     
     
-      <link rel="stylesheet" href="../static/exercises/map-scale.css">
-    
-      <link rel="stylesheet" href="../static/exercises/new-group-layer.css">
-    
       <link rel="stylesheet" href="../static/exercises/temperature.css">
-    
-      <link rel="stylesheet" href="../static/exercises/wfs-query.css">
     
       <link rel="stylesheet" href="../static/exercises/zoom-panel.css">
     
@@ -383,7 +377,7 @@
 <ol>
 <li>
 <p>Añade un botón que añada un nuevo grupo de capas con una capa WMS al mapa. Puede usar el servicio WMS <code>http://mesonet.agron.iastate.edu/cgi-bin/wms/nexrad/n0r-t.cgi</code> y la capa <code>nexrad-n0r-wmst</code>.</p>
-<p><strong>Solución</strong>: <a href="../static/exercises/new-group-layer.js">js</a>, <a href="../static/exercises/new-group-layer.css">css</a>.</p>
+<p><strong>Solución</strong>: <a href="../static/exercises/new-group-layer.js">js</a>.</p>
 </li>
 <li>
 <p>Añade un control con dos casillas para introducir latitud/longitud y un botón para hacer zoom a la coordenada especificada.</p>
@@ -400,10 +394,6 @@
 <p><strong>Solución</strong>: <a href="../static/exercises/zoom-panel.js">js</a>, <a href="../static/exercises/zoom-panel.css">css</a>.</p>
 </li>
 <li>
-<p>Añade un control que muestre la escala del mapa. El control que hace esto es <a href="http://dev.openlayers.org/docs/files/OpenLayers/Control/Scale-js.html">OpenLayers.Control.Scale</a>.</p>
-<p><strong>Solución</strong>: <a href="../static/exercises/scale.js">js</a>, <a href="../static/exercises/scale.css">css</a>.</p>
-</li>
-<li>
 <p>Añade un botón que active un control del mapa de forma que cuando se pulse en el mapa se obtenga la temperatura en el punto. Para ello puedes utilizar el servicio de Open Weather Map con la siguiente URL: <code>http://api.openweathermap.org/data/2.5/weather?APPID=d8cbabebfd28985fe4ca7ab08784de01&amp;lat=&lt;latitud&gt;&amp;lon=&lt;longitud&gt;</code>.</p>
 <p><strong>Solución</strong>: <a href="../static/exercises/temperature.js">js</a>, <a href="../static/exercises/temperature.css">css</a>.</p>
 </li>
@@ -412,12 +402,8 @@
 <p><strong>Solución</strong>: <a href="../static/exercises/measure.js">js</a>.</p>
 </li>
 <li>
-<p>Añade un control donde se pueda elegir la capa, el atributo de la tabla, el operador (<code>==</code>, <code>!=</code>, <code>&lt;</code> <code>&gt;</code>, <code>&lt;=</code> <code>&gt;=</code>, <code>~</code>) y un valor a introducir por el usuario, y al pulsar un botón se muestre una tabla con las filas que cumplan la condición (atributo - operador - valor).</p>
-<p><strong>Solución</strong>: <a href="../static/exercises/wfs-query.js">js</a>, <a href="../static/exercises/wfs-query.css">css</a>.</p>
-</li>
-<li>
-<p>Añade un control donde se pueda introducir un <a href="http://docs.geoserver.org/stable/en/user/tutorials/cql/cql_tutorial.html">filtro CQL</a> manualmente y al pulsar un botón filtre una capa (configurada en el <code>public-conf.json</code>).</p>
-<p><strong>Solución</strong>: <a href="../static/exercises/filter.js">js</a>, <a href="../static/exercises/filter.css">css</a>.</p>
+<p>Añade un control donde se pueda introducir un <a href="http://docs.geoserver.org/stable/en/user/tutorials/cql/cql_tutorial.html">filtro CQL</a> manualmente y al pulsar un botón filtre la capa <em>Límites provinciales</em> (configurada en el <code>public-conf.json</code>). Puedes utilizar el filtro <code>nprov LIKE 'BUENOS AIRES'</code> para probar.</p>
+<p><strong>Solución</strong>: <a href="../static/exercises/filter.js">js</a>.</p>
 </li>
 </ol>
                 
@@ -482,17 +468,11 @@
       
         <script src="../static/exercises/filter.js"></script>
       
-        <script src="../static/exercises/map-scale.js"></script>
-      
         <script src="../static/exercises/measure.js"></script>
       
         <script src="../static/exercises/new-group-layer.js"></script>
       
         <script src="../static/exercises/temperature.js"></script>
-      
-        <script src="../static/exercises/wfs-query.js"></script>
-      
-        <script src="../static/exercises/zoom-panel-install-button.js"></script>
       
         <script src="../static/exercises/zoom-panel.js"></script>
       
