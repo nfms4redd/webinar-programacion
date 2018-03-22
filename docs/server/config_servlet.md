@@ -134,7 +134,7 @@ public class GuardarCentroServlet extends HttpServlet {
 }
 ```
 
-Ahora, para probarlo tendremos que crear un plugin cliente con un botón que ,cuando se pulse, llame al servlet que acabamos de crear enviando el centro del mapa en ese momento. Bastará crear un nuevo plugin con el siguiente módulo (para más detalles ver apartados sobre [cliente](../client/hello_world.md)):
+Ahora, para probarlo tendremos que crear un plugin cliente con un botón que,  cuando se pulse, llame al servlet que acabamos de crear enviando el centro del mapa en ese momento. Bastará crear un nuevo plugin con el siguiente módulo (para más detalles ver apartados sobre [cliente](../client/hello_world.md)):
 
 ```js
 define([ "message-bus", "botonera/crear", "ol2/map" ], function(bus, botonera, olmap) {
@@ -154,7 +154,7 @@ define([ "message-bus", "botonera/crear", "ol2/map" ], function(bus, botonera, o
 });
 ```
 
-Por último, deberíamos poder instalar empaquetar nuestro plugin y reiniciar el portal para poder utilizar nuestro botón enlazado con nuestro servlet.
+Por último, deberíamos poder empaquetar y desplegar nuestro plugin y luego reiniciar el portal para poder utilizar nuestro botón enlazado con nuestro servlet.
 
 ## Manejando errores
 

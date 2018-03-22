@@ -133,6 +133,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -144,7 +145,7 @@ import javax.sql.DataSource;
 
 import net.sf.json.JSONSerializer;
 
-public class ProvinciasDBServlet extends HttpServlet {
+public class ProvinciasServlet extends HttpServlet {
 private static final long serialVersionUID = 1L;
 
   @Override
@@ -154,7 +155,7 @@ private static final long serialVersionUID = 1L;
     DataSource dataSource;
     try {
       context = new InitialContext();
-      dataSource = (DataSource) context.lookup("java:/comp/env/jdbc/nfms");
+      dataSource = (DataSource) context.lookup("java:/comp/env/jdbc/geoladris");
     } catch (NamingException e) {
       throw new ServletException("Problema en la configuración");
     }
@@ -165,7 +166,7 @@ private static final long serialVersionUID = 1L;
       Statement statement = connection.createStatement();
       ResultSet result = statement.executeQuery("SELECT fna FROM provincias");
       while (result.next()) {
-        provincias.add(result.getString("name_1"));
+        provincias.add(result.getString("fna"));
       }
 
       resp.setContentType("application/json");
@@ -183,6 +184,7 @@ private static final long serialVersionUID = 1L;
     }
   }
 }
+
 ```
 
 Ahora, para probarlo tendremos que crear un plugin cliente con una lista que al cargar llame al servlet que acabamos de crear y rellene la lista con los nombres devueltos. Bastará crear un nuevo plugin con el siguiente módulo (para más detalles ver apartados sobre [cliente](../client/hello_world.md)):
@@ -194,8 +196,7 @@ define([ "message-bus" ], function(bus) {
   document.body.appendChild(list);
   bus.send("ajax", {
     url : "provincias",
-    success : function(json, textStatus, jqXHR) {
-      var provincias = JSON.parse(json);
+    success : function(provincias, textStatus, jqXHR) {
       for (var i = 0; i < provincias.length; i++) {
         var div = document.createElement('div');
         div.innerHTML = provincias[i];

@@ -84,7 +84,7 @@ cd ..
 docker-compose restart portal
 ```
 
-Si hemos hecho todo correctamente será posible, previo reinicio del servidor, acceder a la URL [http://localhost/portal/holamundo](http://localhost:8082/portal/holamundo) y obtener un error `405: Method Not Allowed` (método no permitido). Podemos comprobar que el mensaje es distinto si accedemos a una URL inexistente, como [http://localhost/portal/holamundonoexiste](http://localhost:8082/portal/holamundonoexiste), donde obtenemos `404: Not Found` (no encontrado).
+Si hemos hecho todo correctamente será posible, previo reinicio del servidor, acceder a la URL [http://localhost:8082/portal/holamundo](http://localhost:8082/portal/holamundo) y obtener un error `405: Method Not Allowed` (método no permitido). Podemos comprobar que el mensaje es distinto si accedemos a una URL inexistente, como [http://localhost:8082/portal/holamundonoexiste](http://localhost:8082/portal/holamundonoexiste), donde obtenemos `404: Not Found` (no encontrado).
 
 Esto quiere decir que el servlet está bien instalado. Sólo hace falta implementar el método GET, que es el que está pidiendo el navegador:
 
