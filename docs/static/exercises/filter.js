@@ -1,10 +1,10 @@
-define([ "message-bus", "botonera", "map" ], function(bus, botonera, map) {
-	botonera.newText(function(text) {
-		var provincesLayer = map.getLayer("provinces");
+define([ "toolbar", "ol2/map" ], function(toolbar, map) {
+    let cql = $("<input/>").attr("id", "cql").attr("type", "text").appendTo(toolbar);
+    $("<button/>").html("Filtrar").appendTo(toolbar).click(function() {
+		var provincesLayer = map.getMap().getLayer("limites_provinciales");
 		provincesLayer.mergeNewParams({
-			"CQL_FILTER" : text
+			"cql_filter" : cql.val()
 		});
 	});
-	
-	// http://lin-ear-th-inking.blogspot.de/2013/06/how-to-get-openlayers-wmsgetfeatureinfo.html
 });
+
